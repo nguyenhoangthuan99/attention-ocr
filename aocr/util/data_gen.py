@@ -20,11 +20,13 @@ class DataGen(object):
     GO_ID = 1
     EOS_ID = 2
     IMAGE_HEIGHT = 32
-    CHARMAP = ['', '', ''] + list('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    CHARMAP = ['', '', ''] + [' ', '!', '"', '#', '$', '%', '&', '\\', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V','W','X','Y','Z','[','\\',']','^','_','`','{','|','}','~','l','r']
+#list(" !\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`{|}~lr")
+    
 
     @staticmethod
     def set_full_ascii_charmap():
-        DataGen.CHARMAP = ['', '', ''] + [chr(i) for i in range(32, 127)]
+        DataGen.CHARMAP = self.CHARMAP #['', '', ''] + [chr(i) for i in range(32, 127)]
 
     def __init__(self,
                  annotation_fn,
@@ -85,11 +87,11 @@ class DataGen(object):
     def convert_lex(self, lex):
         if sys.version_info >= (3,):
             lex = lex.decode('iso-8859-1')
-
+        CHARMAP = ['', '', ''] + [' ', '!', '"', '#', '$', '%', '&', '\\', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','V','W','X','Y','Z','[','\\',']','^','_','`','{','|','}','~','l','r']
         assert len(lex) < self.bucket_specs[-1][1]
-
+        
         return np.array(
-            [self.GO_ID] + [self.CHARMAP.index(char) for char in lex] + [self.EOS_ID],
+            [self.GO_ID] + [CHARMAP.index(char) for char in lex] + [self.EOS_ID],
             dtype=np.int32)
 
     @staticmethod

@@ -20,13 +20,13 @@ class Config(object):
     STEPS_PER_CHECKPOINT = 100
     EXPORT_FORMAT = 'savedmodel'
     EXPORT_PATH = 'exported'
-    FORCE_UPPERCASE = True
+    FORCE_UPPERCASE = False
     SAVE_FILENAME = False
     FULL_ASCII = False
 
     # Optimization
     NUM_EPOCH = 1000
-    BATCH_SIZE = 65
+    BATCH_SIZE = 2
     INITIAL_LEARNING_RATE = 1.0
 
     # Network parameters
@@ -36,14 +36,14 @@ class Config(object):
     ATTN_NUM_HIDDEN = 128  # number of hidden units in attention decoder cell
     ATTN_NUM_LAYERS = 2  # number of layers in attention decoder cell
     # (Encoder number of hidden units will be ATTN_NUM_HIDDEN*ATTN_NUM_LAYERS)
-    LOAD_MODEL = True
+    LOAD_MODEL = False
     OLD_MODEL_VERSION = False
-    TARGET_VOCAB_SIZE = 26+10+3  # 0: PADDING, 1: GO, 2: EOS, >2: 0-9, a-z
+    TARGET_VOCAB_SIZE = 73+3  # 0: PADDING, 1: GO, 2: EOS, >2: 0-9, a-z
     CHANNELS = 1  # number of color channels from source image (1 = grayscale, 3 = rgb)
 
-    MAX_WIDTH = 160
+    MAX_WIDTH = 416
     MAX_HEIGHT = 60
-    MAX_PREDICTION = 8
+    MAX_PREDICTION = 69
 
     USE_DISTANCE = True
 

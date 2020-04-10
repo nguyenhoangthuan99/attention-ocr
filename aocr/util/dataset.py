@@ -37,7 +37,7 @@ def generate(annotations_path, output_path, log_step=5000,
                 logging.error('missing filename or label, ignoring line %i: %s', idx+1, line)
                 continue
             (img_path, label) = line_match.groups()
-
+            img_path = "/home/thuan/Desktop/OCR/VDSENSE/ICAR/image/"+img_path
             with open(img_path, 'rb') as img_file:
                 img = img_file.read()
 
@@ -65,3 +65,6 @@ def generate(annotations_path, output_path, log_step=5000,
         logging.info('Longest label (%i): %s', len(longest_label), longest_label)
 
     writer.close()
+
+generate(annotations_path="/home/thuan/Desktop/OCR/VDSENSE/ICAR/val.txt", output_path="dataset/testing.tfrecords", log_step=5000,
+             force_uppercase=False, save_filename=False)
